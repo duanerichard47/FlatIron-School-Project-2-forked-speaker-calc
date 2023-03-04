@@ -33,8 +33,22 @@ def amplifier_power_required():
         return 0
 
     desired_level = click.prompt('Desired dB SPL at this distance', default=80)
+
+    if desired_level <= 0:
+        print('SPL must be greater than 0.')
+        return 0
+
     headroom = click.prompt('Amplifier headroom in dB', default=3)
+
+    if headroom <= 0:
+        print('Headroom must be greater than 0.')
+        return 0
+
     sensitivity = click.prompt('Speaker sensitivity rating in dB', default=85)
+
+    if sensitivity <= 0:
+        print('Sensitivity must be greater than 0.')
+        return 0
 
     power_required = 10 ** (((desired_level + headroom - sensitivity) + 20 * math.log((distance_from_source / reference_distance), 10)) / 10)
 

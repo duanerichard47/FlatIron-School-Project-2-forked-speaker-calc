@@ -32,9 +32,9 @@ def amplifier_power_required():
         print('Distance must be greater than 0.')
         return 0
 
-    desired_level = click.prompt('Desired dB SPL at distance', default=80)
-    sensitivity = click.prompt('Speaker sensitivity rating in dB', default=85)
+    desired_level = click.prompt('Desired dB SPL at this distance', default=80)
     headroom = click.prompt('Amplifier headroom in dB', default=3)
+    sensitivity = click.prompt('Speaker sensitivity rating in dB', default=85)
 
     power_required = 10 ** (((desired_level + headroom - sensitivity) + 20 * math.log((distance_from_source / reference_distance), 10)) / 10)
 
@@ -48,8 +48,9 @@ def amplifier_power_required():
     print('')
     print('What does this mean?')
     print('Assuming the speaker and amplifier output have the same impedance, '
-          'the amplifier will need to have ' + str(power_required) + ' watts of power to drive the speaker speaker at '
-          + str(desired_level) + 'dB of SPL at ' + str(distance_from_source) + ' ' + str(units) + '. The speaker must also be able to handle this much power.')
+          'the amplifier will need to have ' + str(power_required) + ' watts of power to drive the speaker at '
+          + str(desired_level) + 'dB of SPL at ' + str(distance_from_source) + ' ' + str(units) + 
+          '. The speaker must also be able to handle this much power.')
 
     return power_required
 

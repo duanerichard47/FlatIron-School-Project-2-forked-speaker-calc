@@ -53,8 +53,13 @@ def amplifier_power_required():
     store, index = pick(options, heading, "->")
 
     if index == 0:
-        new_amp = Amplifier(name="Power Amplifier", power=power_required)
-        session.add(new_amp)
+        amp_name = 'Power Amplifier'
+
+        if session.query(Amplifier).all() == []:
+            session.add(Amplifier(name=amp_name, power=power_required))
+        else:
+            session.query(Amplifier).update({Amplifier.name: amp_name, Amplifier.power: power_required})
+
         session.commit()
 
     return power_required

@@ -7,10 +7,8 @@ from amp_power import amplifier_power_required
 click.clear()
 @click.command()
 
-def n():
-    pass
-
-if __name__ == '__main__':
+def main_menu():
+    run_menu = True
 
     title = 'Speaker System Design Calculator'
     
@@ -34,44 +32,49 @@ if __name__ == '__main__':
                'Air Core Inductor Designer',
                'Exit Application']
     
-    option, index = pick(options, title, "->")
+    while run_menu == True:
+        option, index = pick(options, title, "->")
     
-    if index == 0:
-        amplifier_power_required()
-    elif index == 1:
-        print(option)
-    elif index == 2:
-        print(option)
-    elif index == 3:
-        print(option)
-    elif index == 4:
-        print(option)
-    elif index == 5:
-        print(option)
-    elif index == 6:
-        print(option)
-    elif index == 7:
-        print(option)
-    elif index == 8:
-        print(option)
-    elif index == 9:
-        print(option)
-    elif index == 10:
-        print(option)
-    elif index == 11:
-        print(option)
-    elif index == 12:
-        print(option)
-    elif index == 13:
-        print(option)
-    elif index == 14:
-        print(option)
-    elif index == 15:
-        print(option)
-    elif index == 16:
-        print(option)
-    elif index == 17:
-        print(option)
-    else:
-        print("Bye!")
+        if index == 0:
+            amplifier_power_required()
+        elif index == 1:
+            print(option)
+        elif index == 2:
+            print(option)
+        elif index == 3:
+            print(option)
+        elif index == 4:
+            print(option)
+        elif index == 5:
+            print(option)
+        elif index == 6:
+            print(option)
+        elif index == 7:
+            print(option)
+        elif index == 8:
+            print(option)
+        elif index == 9:
+            print(option)
+        elif index == 10:
+            print(option)
+        elif index == 11:
+            print(option)
+        elif index == 12:
+            print(option)
+        elif index == 13:
+            print(option)
+        elif index == 14:
+            print(option)
+        elif index == 15:
+            print(option)
+        elif index == 16:
+            print(option)
+        elif index == 17:
+            print(option)
+        else:
+            print("\n All done.\n\n")
+            run_menu = False
 
+
+if __name__ == '__main__':
+    main_menu()

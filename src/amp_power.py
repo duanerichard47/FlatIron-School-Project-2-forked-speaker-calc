@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import click
 from pick import pick
 import math
@@ -42,7 +40,7 @@ def amplifier_power_required():
     click.clear()
 
     options = ['Yes', 'No']
-    description = ('Power required: ' + str(power_required) + ' watts\n\n'
+    description = ('Power required: ' + str(power_required) + ' watts per channel\n\n'
                    'Assuming the speaker and amplifier output have the same \n'
                    'impedance, the amplifier will need to have ' + str(power_required) + ' watts \n'
                    'of power to drive the speaker at ' + str(desired_level) + 'dB of SPL at ' + str(distance_from_source) + ' ' + units.lower() + 
@@ -52,6 +50,6 @@ def amplifier_power_required():
     store, index = pick(options, heading, "->")
 
     if index == 0:
-        print('Saved.')
+        pass
 
     return power_required

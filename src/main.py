@@ -7,10 +7,13 @@ from amp_power import amplifier_power_required
 click.clear()
 @click.command()
 
+def designed_system():
+    pass
+
 def main_menu():
     run_menu = True
 
-    title = 'Speaker System Design Calculator'
+    title = 'Speaker System Designer'
     
     options = ['Amplifier Power Required',
                'Ohm\'s Law / Watt\'s Law',
@@ -30,6 +33,7 @@ def main_menu():
                'Impedance Equalizer',
                'Contour Network',
                'Air Core Inductor Designer',
+               'View Designed System',
                'Exit Application']
     
     while run_menu == True:
@@ -38,39 +42,41 @@ def main_menu():
         if index == 0:
             amplifier_power_required()
         elif index == 1:
-            print(option)
+            pass
         elif index == 2:
-            print(option)
+            pass
         elif index == 3:
-            print(option)
+            pass
         elif index == 4:
-            print(option)
+            pass
         elif index == 5:
-            print(option)
+            pass
         elif index == 6:
-            print(option)
+            pass
         elif index == 7:
-            print(option)
+            pass
         elif index == 8:
-            print(option)
+            pass
         elif index == 9:
-            print(option)
+            pass
         elif index == 10:
-            print(option)
+            pass
         elif index == 11:
-            print(option)
+            pass
         elif index == 12:
-            print(option)
+            pass
         elif index == 13:
-            print(option)
+            pass
         elif index == 14:
-            print(option)
+            pass
         elif index == 15:
-            print(option)
+            pass
         elif index == 16:
-            print(option)
+            pass
         elif index == 17:
-            print(option)
+            pass
+        elif index == 18:
+            designed_system()
         else:
             print("\n All done.\n\n")
             run_menu = False

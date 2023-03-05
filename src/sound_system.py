@@ -1,5 +1,4 @@
 from sqlalchemy import (Index, Column, Integer, String)
-from sqlalchemy.ext.declarative import declarative_base
 from create_db import Base
 
 class Enclosure:

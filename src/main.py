@@ -4,13 +4,11 @@ import click
 from pick import pick
 from sqlalchemy import create_engine
 from create_db import Base, engine
+from final import designed_system
 from amp_power import amplifier_power_required
 
 click.clear()
 @click.command()
-
-def designed_system():
-    pass
 
 def main_menu():
     run_menu = True

@@ -2,6 +2,8 @@
 
 import click
 from pick import pick
+from sqlalchemy import create_engine
+from create_db import Base, engine
 from amp_power import amplifier_power_required
 
 click.clear()
@@ -83,4 +85,5 @@ def main_menu():
 
 
 if __name__ == '__main__':
+    Base.metadata.create_all(engine)
     main_menu()

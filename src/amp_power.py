@@ -1,3 +1,6 @@
+from create_db import session
+from sound_system import Amplifier
+
 import click
 from pick import pick
 import math
@@ -50,6 +53,8 @@ def amplifier_power_required():
     store, index = pick(options, heading, "->")
 
     if index == 0:
-        pass
+        new_amp = Amplifier(name="Power Amplifier", power=power_required)
+        session.add(new_amp)
+        session.commit()
 
     return power_required

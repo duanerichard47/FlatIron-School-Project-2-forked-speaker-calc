@@ -1,34 +1,36 @@
+from sqlalchemy import (Index, Column, Integer, String)
+from sqlalchemy.ext.declarative import declarative_base
+from create_db import Base
+
 class Enclosure:
     pass
 
 class Speaker:
     pass
 
-class Tweeter(Speaker):
+class Tweeter:
     pass
 
-class Midrange(Speaker):
+class Midrange:
     pass
 
-class Woofer(Speaker):
+class Woofer:
     pass
 
-class Amplifier:
+class Amplifier(Base):
+    __tablename__ = 'amplifier'
+
+    id = Column(Integer(), primary_key=True)
+    name = Column(String())
+    power = Column(Integer())
+
+class Preamplifier:
     pass
 
-class Preamplifier(Amplifier):
-    pass
-
-class Receiver(Amplifier):
+class Receiver:
     pass
 
 class CrossOver:
-    pass
-
-class Active(CrossOver):
-    pass
-
-class Passive(CrossOver):
     pass
 
 class Equalizer:

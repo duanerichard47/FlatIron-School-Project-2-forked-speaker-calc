@@ -1,3 +1,6 @@
+class Enclosure:
+    pass
+
 class Speaker:
     pass
 

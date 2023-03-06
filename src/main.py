@@ -5,7 +5,8 @@ from pick import pick
 from sqlalchemy import create_engine
 from create_db import Base, engine
 from final import designed_system
-from amp_power import amplifier_power_required
+from amp import amplifier_power_required
+from speaker import build_speakers
 
 click.clear()
 @click.command()
@@ -26,7 +27,7 @@ def main_menu():
         if index == 0:
             amplifier_power_required()
         elif index == 1:
-            pass
+            build_speakers()
         elif index == 2:
             designed_system()
         else:

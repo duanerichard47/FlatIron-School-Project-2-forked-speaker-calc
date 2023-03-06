@@ -23,6 +23,9 @@ class Amplifier(Base):
     name = Column(String())
     power = Column(Integer())
 
+    def __repr__(self):
+        return f"{self.name} Output = {self.power} watts"
+
 class Preamplifier:
     pass
 

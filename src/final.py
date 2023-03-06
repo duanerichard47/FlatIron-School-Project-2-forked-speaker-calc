@@ -12,3 +12,7 @@ def designed_system():
     heading = 'Speaker System Designer\n\n' + amp_power
 
     pick(['Done'], heading, "->")
+
+
+# Typical system setup
+# Analog Source or DAC -> Pre-amplifier -> Power Amplifier -> Speaker or set of speakers

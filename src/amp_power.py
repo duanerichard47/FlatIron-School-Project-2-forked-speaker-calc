@@ -45,7 +45,7 @@ def amplifier_power_required():
     options = ['Yes', 'No']
     description = ('Power required: ' + str(power_required) + ' watts per channel\n\n'
                    'Assuming the speaker and amplifier output have the same \n'
-                   'impedance, the amplifier will need to have ' + str(power_required) + ' watts \n'
+                   'impedance of 8 ohms, the amplifier will need to have ' + str(power_required) + ' watts \n'
                    'of power to drive the speaker at ' + str(desired_level) + 'dB of SPL at ' + str(distance_from_source) + ' ' + units.lower() + 
                    '.\nThe speaker must also be able to handle this much power.\n')
     heading = title + description + ('\n Store this result?')
@@ -56,7 +56,7 @@ def amplifier_power_required():
         amp_name = 'Power Amplifier'
 
         if session.query(Amplifier).all() == []:
-            session.add(Amplifier(name=amp_name, power=power_required))
+            session.add(Amplifier(name=amp_name, power=power_required, ohms=8))
         else:
             session.query(Amplifier).update({Amplifier.name: amp_name, Amplifier.power: power_required})
 

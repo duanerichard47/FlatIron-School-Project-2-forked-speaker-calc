@@ -1,11 +1,16 @@
-from sqlalchemy import (Index, Column, Integer, String)
+from sqlalchemy import (Index, Column, Integer, Float, String)
 from create_db import Base
 
 class Enclosure:
     pass
 
 class Speaker:
-    pass
+    __tablename__ = 'speakers'
+
+    id = Column(Integer(), primary_key=True)
+    name = Column(String())
+    power = Column(Integer())
+    ohms = Column(Float())
 
 class Tweeter:
     pass
@@ -22,6 +27,7 @@ class Amplifier(Base):
     id = Column(Integer(), primary_key=True)
     name = Column(String())
     power = Column(Integer())
+    ohms = Column(Float())
 
     def __repr__(self):
         return f"{self.name} Output = {self.power} watts"

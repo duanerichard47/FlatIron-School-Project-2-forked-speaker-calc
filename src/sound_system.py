@@ -7,7 +7,7 @@ class Speaker(Base):
     id = Column(Integer(), primary_key=True)
     name = Column(String())
     power = Column(Integer())
-    sensetivity = Column(Integer())
+    sensitivity = Column(Integer())
     ohms = Column(Float())
     channel = Column(String())
     bass_port_len = Column(Float())

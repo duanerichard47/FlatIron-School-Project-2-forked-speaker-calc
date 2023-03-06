@@ -15,4 +15,4 @@ def designed_system():
 
 
 # Typical system setup
-# Analog Source or DAC -> Pre-amplifier -> Power Amplifier -> Speaker or set of speakers
+# Analog Source or DAC -> Pre-amplifier -> Cross-Over or Equalizer -> Power Amplifier -> Speaker or set of speakers

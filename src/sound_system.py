@@ -4,22 +4,17 @@ from create_db import Base
 class Enclosure:
     pass
 
-class Speaker:
+class Speaker(Base):
     __tablename__ = 'speakers'
 
     id = Column(Integer(), primary_key=True)
     name = Column(String())
     power = Column(Integer())
     ohms = Column(Float())
-
-class Tweeter:
-    pass
-
-class Midrange:
-    pass
-
-class Woofer:
-    pass
+    channel = Column(String())
+    port_length = Column(Float())
+    min_freq = Column(Integer())
+    max_freq = Column(Integer())
 
 class Amplifier(Base):
     __tablename__ = 'amplifier'

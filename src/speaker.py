@@ -19,7 +19,10 @@ def build_speakers():
 
     print('\n ' + title)
 
-    coils = 1
+    coil_count = 1
+    capacitor = 0
+    inductor = 0
+    fx_range = [20, 20000]
 
     if i_style == 0:
         help = (' Crossovers are used to filter certain frequencies from a driver.\n'
@@ -32,7 +35,7 @@ def build_speakers():
         
         heading = title + help + ('\n Select Filtering Style of Cross-Over')
 
-        coils = 2
+        coil_count = 2
 
         options = ['1st Order Butterworth', '1st Order Solen Split (-6 dB)']
         style, c_style = pick(options, heading, "->")
@@ -51,30 +54,30 @@ def build_speakers():
         capacitor = (c_ratio / (hfi * cfx)) * 1000000 # in uF on + side of tweeter
         inductor = ((l_ratio * lfi) / cfx) * 1000 # in mH on + side of woofer
 
-        ohms = hfi # Need to calculate total resistance of both
+        total_ohms = hfi # Need to calculate total resistance of both
     else:
-        ohms = click.prompt(' Total resistance of speaker in Ohms', default=8, type=click.IntRange(1))
+        total_ohms = click.prompt(' Total resistance of speaker in Ohms', default=8, type=click.IntRange(1))
 
-    power = click.prompt(' Total watts output/input of speaker', default=30, type=click.IntRange(1))
-    sensitivity = click.prompt(' Speaker sensitivity rating in dB', default=85, type=click.IntRange(1))
+    power_draw = click.prompt(' Total watts output/input of speaker', default=30, type=click.IntRange(1))
+    total_sensitivity = click.prompt(' Speaker sensitivity rating in dB', default=85, type=click.IntRange(1))
 
     click.clear()
 
     options = ['Yes', 'No']
-    if coils > 1:
+    if coil_count > 1:
         description = ('New speaker specifications\n\n'
-                    'Speaker power: ' + str(power) + ' watts \n'
-                    'Speaker sensitivity: ' + str(sensitivity) + ' dB \n'
-                    'Speaker impedance: ' + str(ohms) + ' Ohms \n'
+                    'Speaker power: ' + str(power_draw) + ' watts \n'
+                    'Speaker sensitivity: ' + str(total_sensitivity) + ' dB \n'
+                    'Speaker impedance: ' + str(total_ohms) + ' Ohms \n'
                     'Tweeter capacitor: ' + str(capacitor) + ' uF \n'
                     'Woofer inductor: ' + str(inductor) + ' mH \n'
                     'Cross-Over Frequency: ' + str(cfx) + ' Hz \n'
                     'Frequency response: 20 Hz - 20,000 Hz \n')
     else:
         description = ('New speaker specifications\n\n'
-                    'Speaker power: ' + str(power) + ' watts \n'
-                    'Speaker sensitivity: ' + str(sensitivity) + ' dB \n'
-                    'Speaker impedance: ' + str(ohms) + ' Ohms \n'
+                    'Speaker power: ' + str(power_draw) + ' watts \n'
+                    'Speaker sensitivity: ' + str(total_sensitivity) + ' dB \n'
+                    'Speaker impedance: ' + str(total_ohms) + ' Ohms \n'
                     'Frequency response: 20 Hz - 20,000 Hz \n')
         
     heading = title + description + ('\n Store this result?')
@@ -82,28 +85,30 @@ def build_speakers():
     store, index = pick(options, heading, "->")
 
     if index == 0:
-        spk_name = 'Speaker A'
+        spk_name = 'Speaker'
 
         if session.query(Speaker).all() == []:
-            session.add(Speaker(name=spk_name, power=0, ohms=8))
+            session.add(Speaker(name=spk_name, 
+                                power=power_draw, 
+                                coils=coil_count, 
+                                sensitivity=total_sensitivity, 
+                                ohms=total_ohms,
+                                cap_rating=capacitor,
+                                ind_rating=inductor,
+                                min_freq=fx_range[0],
+                                max_freq=fx_range[1]))
         else:
-            session.query(Speaker).update({Speaker.name: spk_name, Speaker.power: 0})
+            session.query(Speaker).update({Speaker.name: spk_name,
+                                           Speaker.power: power_draw,
+                                           Speaker.coils: coil_count,
+                                           Speaker.sensitivity: total_sensitivity,
+                                           Speaker.ohms: total_ohms,
+                                           Speaker.cap_rating: capacitor,
+                                           Speaker.ind_rating: inductor,
+                                           Speaker.min_freq: fx_range[0],
+                                           Speaker.max_freq: fx_range[1]})
 
         session.commit()
 
     return None
 
-
-# class Speaker(Base):
-#     __tablename__ = 'speakers'
-
-#     id = Column(Integer(), primary_key=True)
-#     name = Column(String())
-#     power = Column(Integer())
-#     coils = Column(Integer())
-#     sensitivity = Column(Integer())
-#     ohms = Column(Float())
-#     cap_rating = Column(Float())
-#     ind_rating = Column(Float())
-#     min_freq = Column(Integer())
-#     max_freq = Column(Integer())

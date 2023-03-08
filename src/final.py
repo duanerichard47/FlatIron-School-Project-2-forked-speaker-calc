@@ -13,6 +13,8 @@ def designed_system():
 
     pick(['Done'], heading, "->")
 
-
+# 
+# 
 # Typical system setup
 # Analog Source or DAC -> Pre-amplifier -> Cross-Over or Equalizer -> Power Amplifier -> Speaker or set of speakers
+# 

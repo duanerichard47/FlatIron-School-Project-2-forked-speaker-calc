@@ -10,8 +10,8 @@ class Speaker(Base):
     coils = Column(Integer())
     sensitivity = Column(Integer())
     ohms = Column(Float())
-    channel = Column(String())
-    bass_port_len = Column(Float())
+    cap_rating = Column(Float())
+    ind_rating = Column(Float())
     min_freq = Column(Integer())
     max_freq = Column(Integer())
 

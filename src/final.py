@@ -9,12 +9,10 @@ def designed_system():
     if session.query(Amplifier).all() != []:
         amp_power = str(session.query(Amplifier).all()[0])
 
-    heading = 'Speaker System Designer\n\n' + amp_power
+    if session.query(Speaker).all() != []:
+        speakers = str(session.query(Speaker).all()[0])
+
+    heading = 'Speaker System Designer\n\n' + amp_power + "\n\n" + speakers
 
     pick(['Done'], heading, "->")
 
-# 
-# 
-# Typical system setup
-# Analog Source or DAC -> Pre-amplifier -> Cross-Over or Equalizer -> Power Amplifier -> Speaker or set of speakers
-# 

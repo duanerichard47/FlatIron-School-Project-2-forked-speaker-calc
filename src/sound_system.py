@@ -28,7 +28,7 @@ class Amplifier(Base):
     ohms = Column(Float())
 
     def __repr__(self):
-        return f"{self.name}\nOutput: {self.power} watts"
+        return f"{self.name}\nOutput: {self.power} Watts\nImpedance: {self.ohms} Ohms"
 
 class CrossOver(Base):
     __tablename__ = 'crossovers'

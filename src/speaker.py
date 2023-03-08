@@ -54,7 +54,7 @@ def build_speakers():
         capacitor = (c_ratio / (hfi * cfx)) * 1000000 # in uF on + side of tweeter
         inductor = ((l_ratio * lfi) / cfx) * 1000 # in mH on + side of woofer
 
-        total_ohms = (1 / ((1/hfi) + (1/lfi)))
+        total_ohms = (1 / ((1/hfi) + (1/lfi))) # Simplified calculation
     else:
         total_ohms = click.prompt(' Total resistance of speaker in Ohms', default=8, type=click.IntRange(1))
 

@@ -1,5 +1,5 @@
 from create_db import session
-from sound_system import Speaker
+from sound_system import Speaker, CrossOver
 
 import click
 from pick import pick
@@ -86,6 +86,7 @@ def build_speakers():
 
     if index == 0:
         spk_name = 'Speaker'
+        x_name = 'CrossOver'
 
         if session.query(Speaker).all() == []:
             session.add(Speaker(name=spk_name, 
@@ -93,21 +94,22 @@ def build_speakers():
                                 coils=coil_count, 
                                 sensitivity=total_sensitivity, 
                                 ohms=total_ohms,
-                                cap_rating=capacitor,
-                                ind_rating=inductor,
                                 min_freq=fx_range[0],
                                 max_freq=fx_range[1]))
+            session.add(CrossOver(name=x_name, 
+                                cap_rating=capacitor,
+                                ind_rating=inductor))
         else:
             session.query(Speaker).update({Speaker.name: spk_name,
                                            Speaker.power: power_draw,
                                            Speaker.coils: coil_count,
                                            Speaker.sensitivity: total_sensitivity,
                                            Speaker.ohms: total_ohms,
-                                           Speaker.cap_rating: capacitor,
-                                           Speaker.ind_rating: inductor,
                                            Speaker.min_freq: fx_range[0],
                                            Speaker.max_freq: fx_range[1]})
-
+            session.query(CrossOver).update({CrossOver.name: x_name,
+                                           CrossOver.cap_rating: capacitor,
+                                           CrossOver.ind_rating: inductor})
         session.commit()
 
     return None

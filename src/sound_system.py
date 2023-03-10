@@ -7,12 +7,17 @@ class Speaker(Base):
     id = Column(Integer(), primary_key=True)
     name = Column(String())
     power = Column(Integer())
+    coils = Column(Integer())
     sensitivity = Column(Integer())
     ohms = Column(Float())
-    channel = Column(String())
-    bass_port_len = Column(Float())
     min_freq = Column(Integer())
     max_freq = Column(Integer())
+
+    def __repr__(self):
+        return (f"{self.name}\n"
+                f"Power: {self.power} Watts\n"
+                f"Impedance: {self.ohms} Ohms\n"
+                f"Frequency response: {self.min_freq} Hz - {self.max_freq} Hz")
 
 class Amplifier(Base):
     __tablename__ = 'amplifier'
@@ -23,16 +28,15 @@ class Amplifier(Base):
     ohms = Column(Float())
 
     def __repr__(self):
-        return f"{self.name} Output = {self.power} watts"
+        return f"{self.name}\nOutput: {self.power} Watts\nImpedance: {self.ohms} Ohms"
 
-class CrossOver:
-    pass
+class CrossOver(Base):
+    __tablename__ = 'crossovers'
+    
+    id = Column(Integer(), primary_key=True)
+    name = Column(String())
+    cap_rating = Column(Float())
+    ind_rating = Column(Float())
 
-class Equalizer:
-    pass
-
-class DigitalAnalogConverter:
-    pass
-
-class DigitalSoundProcessor:
-    pass
+    def __repr__(self):
+        return f"Tweeter Capacitor: {self.cap_rating} uF\nWoofer Inductor: {self.ind_rating} mH"

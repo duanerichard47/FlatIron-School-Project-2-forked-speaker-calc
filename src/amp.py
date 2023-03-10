@@ -32,6 +32,7 @@ def amplifier_power_required():
     desired_level = click.prompt(' Desired dB SPL at this distance', default=80, type=click.IntRange(1))
     headroom = click.prompt(' Amplifier headroom in dB', default=3, type=click.IntRange(0))
     sensitivity = click.prompt(' Speaker sensitivity rating in dB', default=85, type=click.IntRange(1))
+    total_ohms = click.prompt(' Amplifier impedance in Ohms', default=8, type=click.IntRange(1))
 
     power_required = 10 ** (((desired_level + headroom - sensitivity) + 20 * math.log((distance_from_source / reference_distance), 10)) / 10)
 
@@ -45,7 +46,7 @@ def amplifier_power_required():
     options = ['Yes', 'No']
     description = ('Power required: ' + str(power_required) + ' watts per channel\n\n'
                    'Assuming the speaker and amplifier output have the same \n'
-                   'impedance of 8 ohms, the amplifier will need to have ' + str(power_required) + ' watts \n'
+                   'impedance of ' + str(total_ohms) + ' ohms, the amplifier will need to have ' + str(power_required) + ' watts \n'
                    'of power to drive the speaker at ' + str(desired_level) + 'dB of SPL at ' + str(distance_from_source) + ' ' + units.lower() + 
                    '.\nThe speaker must also be able to handle this much power.\n')
     heading = title + description + ('\n Store this result?')
@@ -56,9 +57,11 @@ def amplifier_power_required():
         amp_name = 'Power Amplifier'
 
         if session.query(Amplifier).all() == []:
-            session.add(Amplifier(name=amp_name, power=power_required, ohms=8))
+            session.add(Amplifier(name=amp_name, power=power_required, ohms=total_ohms))
         else:
-            session.query(Amplifier).update({Amplifier.name: amp_name, Amplifier.power: power_required})
+            session.query(Amplifier).update({Amplifier.name: amp_name,
+                                             Amplifier.power: power_required,
+                                             Amplifier.ohms: total_ohms})
 
         session.commit()
 
